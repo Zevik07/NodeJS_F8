@@ -15,18 +15,19 @@ route(app);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Morgan
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 
 // Parse
-app.use(express.urlencoded({
-  extended: true
-}))
-app.use(express.json())
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
+app.use(express.json());
 
 // View engines
-app.engine('.hbs', engine({extname: '.hbs'}));
+app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
-
 
 app.listen(port);

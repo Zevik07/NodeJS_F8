@@ -1,14 +1,12 @@
-
 class SitesController {
+  // [GET]
+  index(req, res, next) {
+    res.render('home');
+  }
 
-    // [GET]
-    index(req, res,next) {
-        res.render('home');
-    }
-    
-    search(req, res, next) {
-        res.render('search');
-    }
+  search(req, res, next) {
+    res.render('search');
+  }
 }
 
-module.exports = new SitesController
+module.exports = new SitesController();
