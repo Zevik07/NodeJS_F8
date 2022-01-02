@@ -1,9 +1,9 @@
 class NewsController {
-  // [GET] /news/:slugslugparam
   index(req, res, next) {
     res.render('news');
   }
 
+  // [GET] /news/:slugslugparam
   show(req, res, next) {
     res.send(req.params);
   }

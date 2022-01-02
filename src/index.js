@@ -8,6 +8,11 @@ const port = 3000;
 
 const route = require('./routes');
 
+const db = require('./config/db');
+
+// DB init
+db.connect();
+
 // Route init
 route(app);
 
@@ -28,6 +33,6 @@ app.use(express.json());
 // View engines
 app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
 app.listen(port);
