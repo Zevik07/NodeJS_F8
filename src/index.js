@@ -27,7 +27,13 @@ app.use(express.urlencoded({ extended: true }));
 route(app);
 
 // View engines
-app.engine('.hbs', engine({ extname: '.hbs' }));
+app.engine(
+  '.hbs',
+  engine({
+    extname: '.hbs',
+    helpers: require('./config/view'),
+  }),
+);
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
