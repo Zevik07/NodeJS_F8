@@ -13,9 +13,6 @@ const db = require('./config/db');
 // DB init
 db.connect();
 
-// Route init
-route(app);
-
 // Static dir
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -23,12 +20,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined'));
 
 // Parse
-app.use(
-  express.urlencoded({
-    extended: true,
-  }),
-);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Route init
+route(app);
 
 // View engines
 app.engine('.hbs', engine({ extname: '.hbs' }));

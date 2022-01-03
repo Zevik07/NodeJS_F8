@@ -9,6 +9,10 @@ router.use(function timeLog(req, res, next) {
   next();
 });
 
+router.get('/create', controller.create);
+
+router.post('/store', controller.store);
+
 router.get('/:slug', controller.show);
 
 module.exports = router;
