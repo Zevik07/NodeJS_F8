@@ -10,6 +10,11 @@ const route = require('./routes');
 
 const db = require('./config/db');
 
+const methodOverride = require('method-override');
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
+
 // DB init
 db.connect();
 

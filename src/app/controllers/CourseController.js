@@ -30,6 +30,25 @@ class CourseController {
         console.log(err);
       });
   }
+
+  // [GET] /course/:id/edit
+  edit(req, res, next) {
+    CourseModel.findOne({ _id: req.params.id })
+      .lean()
+      .then((course) => {
+        if (course) res.render('course/edit', { course });
+      })
+      .catch(next); // next(err)
+  }
+
+  // [PUT] /course/:id
+  update(req, res, next) {
+    CourseModel.findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then((course) => {
+        if (course) res.redirect(`/course/${req.params.id}/edit`);
+      })
+      .catch(next); // next(err)
+  }
 }
 
 module.exports = new CourseController();

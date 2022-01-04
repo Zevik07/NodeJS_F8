@@ -7,6 +7,7 @@
                 <th scope="col">Tên khóa học</th>
                 <th scope="col">Trình độ</th>
                 <th scope="col">Thời gian tạo</th>
+                <th scope="col" class="ps-3">Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,10 @@
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
                 <td>{{this.createdAt}}</td>
+                <td>
+                    <a href="/course/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                    <a href="/course/{{this._id}}" class="btn btn-link">Xóa</a>
+                </td>
             </tr>
             {{/each}}
         </tbody>

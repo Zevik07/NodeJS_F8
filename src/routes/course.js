@@ -13,6 +13,10 @@ router.get('/create', controller.create);
 
 router.post('/store', controller.store);
 
+router.get('/:id/edit', controller.edit);
+
+router.put('/:id', controller.update);
+
 router.get('/:slug', controller.show);
 
 module.exports = router;
