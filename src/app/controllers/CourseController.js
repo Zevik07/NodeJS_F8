@@ -49,6 +49,39 @@ class CourseController {
       })
       .catch(next); // next(err)
   }
+
+  // [PATCH] /course/:id
+  restore(req, res, next) {
+    CourseModel.restore({ _id: req.params.id })
+      .then(() => {
+        res.json({
+          status: 'success',
+        });
+      })
+      .catch(next); // next(err)
+  }
+
+  // [DELETE] /course/:id
+  destroy(req, res, next) {
+    CourseModel.delete({ _id: req.params.id })
+      .then(() => {
+        res.json({
+          status: 'success',
+        });
+      })
+      .catch(next); // next(err)
+  }
+
+  // [DELETE] /course/primary-delete/:id
+  permanentlyDestroy(req, res, next) {
+    CourseModel.deleteOne({ _id: req.params.id })
+      .then(() => {
+        res.json({
+          status: 'success',
+        });
+      })
+      .catch(next); // next(err)
+  }
 }
 
 module.exports = new CourseController();

@@ -28,6 +28,7 @@
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
     "mongoose": "^6.1.4",
+    "mongoose-delete": "^0.5.4",
     "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {

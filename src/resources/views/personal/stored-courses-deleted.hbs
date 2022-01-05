@@ -1,7 +1,7 @@
 <div class="mt-4">
     <div class="d-flex justify-content-between align-items-center">
-        <h2 class="mb-0">Khóa học của tôi</h2>
-        <a href="/personal/stored-courses/deleted">Các khóa đã xóa</a>
+        <h2 class="mb-0">Khóa học đã xóa</h2>
+        <a href="/personal/stored-courses">Quay lại</a>
     </div>
     <table class="table table-striped">
         <thead>
@@ -21,19 +21,19 @@
                 <td>{{this.level}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>
-                    <a href="/course/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                    <a href="#" class="btn btn-link restore-course-btn" data-id="{{this._id}}">
+                        Khôi phục
+                    </a>
                     <a href="#" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#comfirmModal"
                         data-bs-id="{{this._id}}">
-                        Xóa
+                        Xóa vĩnh viễn
                     </a>
                 </td>
             </tr>
             {{else}}
             <tr>
                 <td height="300px" class="text-center" colspan="5">
-                    Bạn chưa tạo khóa học nào. Nhấp
-                    <a href="/course/create">vào đây</a>
-                    để tạo
+                    Trống
                 </td>
             </tr>
             {{/each}}
@@ -50,37 +50,59 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                Thao tác này sẽ không thể khôi phục, vẫn xóa vĩnh viễn ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button id="comfirmDeleteCourseBtn" type="button" class="btn btn-danger">Xóa</button>
+                <button id="comfirmDeleteCourseBtn" type="button" class="btn btn-danger">Xóa vĩnh viễn</button>
             </div>
         </div>
     </div>
 </div>
 
 <script type="module">
-    const comfirmModal = document.getElementById('comfirmModal')
-    comfirmModal.addEventListener('show.bs.modal', function (event) {
-        // Button that triggered the modal
-        const button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        const id = button.getAttribute('data-bs-id')
+        /* Restore course */
+        const restoreBtns = document.querySelectorAll('.restore-course-btn')
 
-        const btnDelete = document.getElementById('comfirmDeleteCourseBtn')
-
-        btnDelete.onclick = () => {
-            axios.delete('/course/' + id)
+        Array.from(restoreBtns).forEach((restoreBtn, index) => {
+            restoreBtn.onclick = (e) => {
+                const id = e.target.dataset.id;
+                axios.patch('/course/' + id)
                 .then(function (response) {
                     // handle success
                     if (response.data.status == 'success')
-                        location.reload();
+                        location.reload()
                 })
                 .catch(function (error) {
                     // handle error
                     console.log(error);
                 })
-        }
-    })
+            } 
+        })
+
+        /* Primary delete course */
+        const comfirmModal = document.getElementById('comfirmModal')
+
+        comfirmModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const id = button.getAttribute('data-bs-id')
+
+            const btnDelete = document.getElementById('comfirmDeleteCourseBtn')
+
+            btnDelete.onclick = () => {
+                axios.delete('/course/permanently-delete/' + id)
+                    .then(function (response) {
+                        // handle success
+                        if (response.data.status == 'success')
+                            location.reload();
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        })
+
 </script>

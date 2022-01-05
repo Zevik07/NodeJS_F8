@@ -9,6 +9,8 @@ router.use(function timeLog(req, res, next) {
   next();
 });
 
+router.get('/stored-courses/deleted', controller.storedCoursesDeleted);
+
 router.get('/stored-courses', controller.storedCourses);
 
 module.exports = router;

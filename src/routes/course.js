@@ -13,9 +13,15 @@ router.get('/create', controller.create);
 
 router.post('/store', controller.store);
 
-router.get('/:id/edit', controller.edit);
+router.get('/edit/:id', controller.edit);
 
 router.put('/:id', controller.update);
+
+router.patch('/:id', controller.restore);
+
+router.delete('/:id', controller.destroy);
+
+router.delete('/permanently-delete/:id', controller.permanentlyDestroy);
 
 router.get('/:slug', controller.show);
 
