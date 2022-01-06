@@ -1,6 +1,6 @@
 <div class="mt-4">
     <div class="d-flex justify-content-between align-items-center">
-        <h2 class="mb-0">Khóa học đã xóa</h2>
+        <h2 class="mb-0">Khóa học đã xóa ({{courseNum}})</h2>
         <a href="/personal/stored-courses">Quay lại</a>
     </div>
     <table class="table table-striped">
@@ -9,7 +9,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Tên khóa học</th>
                 <th scope="col">Trình độ</th>
-                <th scope="col">Thời gian tạo</th>
+                <th scope="col">Thời gian xóa</th>
                 <th scope="col" class="ps-3">Thao tác</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
                 <th scope="row">{{increaseOne @index}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
                     <a href="#" class="btn btn-link restore-course-btn" data-id="{{this._id}}">
                         Khôi phục
