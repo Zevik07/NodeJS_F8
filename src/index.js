@@ -12,6 +12,8 @@ const db = require('./config/db');
 
 const methodOverride = require('method-override');
 
+const SortMiddleware = require('./app/middlewares/SortMiddleware');
+
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'));
 
@@ -27,6 +29,9 @@ app.use(morgan('combined'));
 // Parse
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Custom middleware
+app.use(SortMiddleware);
 
 // Route init
 route(app);

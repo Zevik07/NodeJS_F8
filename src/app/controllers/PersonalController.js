@@ -3,10 +3,14 @@ const CourseModel = require('../models/Course');
 class PersonalController {
   // [GET] /personal/stored-courses
   storedCourses(req, res, next) {
-    Promise.all([
-      CourseModel.countDocuments().lean(),
-      CourseModel.find({}).lean(),
-    ])
+    let courses = CourseModel.find({});
+
+    if (req.query.hasOwnProperty('_sort'))
+      courses = courses.sort({
+        [req.query.col]: req.query.type,
+      });
+
+    Promise.all([CourseModel.countDocuments().lean(), courses.lean()])
       .then(([courseNum, courses]) => {
         res.render('personal/stored-courses', {
           courseNum,

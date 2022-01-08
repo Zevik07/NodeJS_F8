@@ -7,9 +7,24 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên khóa học</th>
-                <th scope="col">Trình độ</th>
-                <th scope="col">Thời gian tạo</th>
+                <th scope="col">
+                    <a class="text-reset" href="{{getSortUrl 'name' _sort}}">
+                        Tên khóa học
+                        {{{getSortIcon 'name' _sort}}}
+                    </a>
+                </th>
+                <th scope="col">
+                    <a class="text-reset" href="{{getSortUrl 'level' _sort}}">
+                        Trình độ
+                        {{{getSortIcon 'level' _sort}}}
+                    </a>
+                </th>
+                <th scope="col">
+                    <a class="text-reset" href="{{getSortUrl 'createdAt' _sort}}">
+                        Thời gian tạo
+                        {{{getSortIcon 'createdAt' _sort}}}
+                    </a>
+                </th>
                 <th scope="col" class="ps-3">Thao tác</th>
             </tr>
         </thead>
